@@ -1,6 +1,6 @@
 import br.com.alura.alugames.model.Game
 import br.com.alura.alugames.model.Gamer
-import br.com.alura.alugames.service.SearchGameSharkApi
+import br.com.alura.alugames.service.SearchSharkApi
 import br.com.alura.alugames.utils.transformAge
 import java.util.*
 
@@ -16,7 +16,7 @@ fun main() {
 
         var myGame: Game? = null
         val result = runCatching {
-            val myInfoGame = SearchGameSharkApi().find(idValue)
+            val myInfoGame = SearchSharkApi().findGame(idValue)
 
             myGame = Game(
                 myInfoGame.info.title,
