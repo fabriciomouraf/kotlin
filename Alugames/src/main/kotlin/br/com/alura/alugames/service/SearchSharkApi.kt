@@ -1,7 +1,9 @@
 package br.com.alura.alugames.service
 
+import br.com.alura.alugames.model.Gamer
 import br.com.alura.alugames.model.GamerApiShark
 import br.com.alura.alugames.model.Info
+import br.com.alura.alugames.utils.buildGamer
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.RuntimeException
@@ -33,7 +35,7 @@ class SearchSharkApi {
         return gson.fromJson(json, Info::class.java)
     }
 
-    fun findGamers():List<GamerApiShark> {
+    fun findGamers():List<Gamer> {
         val baseUrl = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
 
         val client: HttpClient = HttpClient.newHttpClient()
@@ -52,7 +54,9 @@ class SearchSharkApi {
 
         val gson = Gson()
         val gsonType = object : TypeToken<List<GamerApiShark>>(){}.type
-        return gson.fromJson(json, gsonType)
+        val listGamerApi: List<GamerApiShark> = gson.fromJson(json, gsonType)
+
+        return listGamerApi.map { gamerApi ->  gamerApi.buildGamer()}
     }
 
 }
