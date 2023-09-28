@@ -13,23 +13,9 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
 class SearchSharkApi {
-
     fun findGame(id:String):Info {
         val baseUrl = "https://www.cheapshark.com/api/1.0/games?id=$id"
-
-        val client: HttpClient = HttpClient.newHttpClient()
-        val request = HttpRequest.newBuilder()
-            .uri(URI.create(baseUrl))
-            .build()
-        val response = client
-            .send(request, HttpResponse.BodyHandlers.ofString())
-
-        val responseStatus = response.statusCode()
-        val json = response.body()
-
-        if(responseStatus == 404 || json.isEmpty()){
-            throw RuntimeException("Event not found in api")
-        }
+        val json = buildRequest(baseUrl)
 
         val gson = Gson()
         return gson.fromJson(json, Info::class.java)
@@ -37,20 +23,7 @@ class SearchSharkApi {
 
     fun findGamers():List<Gamer> {
         val baseUrl = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
-
-        val client: HttpClient = HttpClient.newHttpClient()
-        val request = HttpRequest.newBuilder()
-            .uri(URI.create(baseUrl))
-            .build()
-        val response = client
-            .send(request, HttpResponse.BodyHandlers.ofString())
-
-        val responseStatus = response.statusCode()
-        val json = response.body()
-
-        if(responseStatus == 404 || json.isEmpty()){
-            throw RuntimeException("Event not found in api")
-        }
+        val json = buildRequest(baseUrl)
 
         val gson = Gson()
         val gsonType = object : TypeToken<List<GamerApiShark>>(){}.type
@@ -59,4 +32,21 @@ class SearchSharkApi {
         return listGamerApi.map { gamerApi ->  gamerApi.buildGamer()}
     }
 
+    private fun buildRequest(baseUrl: String): String {
+        val client: HttpClient = HttpClient.newHttpClient()
+        val request = HttpRequest.newBuilder()
+            .uri(URI.create(baseUrl))
+            .build()
+        val response = client
+            .send(request, HttpResponse.BodyHandlers.ofString())
+
+        val responseStatus = response.statusCode()
+
+        val json = response.body()
+
+        if(responseStatus == 404 || json.isEmpty()){
+            throw RuntimeException("Event not found in api")
+        }
+        return json
+    }
 }
