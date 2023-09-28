@@ -55,6 +55,10 @@ data class Gamer (var name:String, var email:String) {
         }
     }
 
+    fun rent(game: Game): Rent{
+        return Rent(this, game)
+    }
+
     companion object Factory{
         fun createGamer(input:Scanner):Gamer{
             println("Welcome, for the next stage create a gamer profile")

@@ -11,17 +11,9 @@ fun main() {
     println("Your gamer age is: " + gamer.birthDate?.transformAge())
 
     do{
-        println("Type game id for search: ")
-        val idValue = input.nextLine()
-
         var myGame: Game? = null
         val result = runCatching {
-            val myInfoGame = SearchSharkApi().findGame(idValue)
-
-            myGame = Game(
-                myInfoGame.info.title,
-                myInfoGame.info.thumb
-            )
+            myGame = SearchSharkApi().findGame()[0]
         }
 
         result.onFailure {

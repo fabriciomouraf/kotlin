@@ -1,8 +1,7 @@
 package br.com.alura.alugames.service
 
-import br.com.alura.alugames.model.Gamer
-import br.com.alura.alugames.model.GamerApiShark
-import br.com.alura.alugames.model.Info
+import br.com.alura.alugames.model.*
+import br.com.alura.alugames.utils.buildGame
 import br.com.alura.alugames.utils.buildGamer
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -13,12 +12,14 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
 class SearchSharkApi {
-    fun findGame(id:String):Info {
-        val baseUrl = "https://www.cheapshark.com/api/1.0/games?id=$id"
+    fun findGame():List<Game> {
+        val baseUrl = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/jogos.json"
         val json = buildRequest(baseUrl)
 
         val gson = Gson()
-        return gson.fromJson(json, Info::class.java)
+        val gsonType = object : TypeToken<List<GameApiShark>>(){}.type
+        val listGameApi: List<GameApiShark> = gson.fromJson(json, gsonType)
+        return listGameApi.map { gameApi -> gameApi.buildGame()}
     }
 
     fun findGamers():List<Gamer> {
