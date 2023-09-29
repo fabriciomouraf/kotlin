@@ -56,8 +56,8 @@ data class Gamer (var name:String, var email:String) {
         }
     }
 
-    fun rent(game: Game, startDate: LocalDate, endDate: LocalDate): Rent{
-        return Rent(this, game, startDate, endDate)
+    fun rent(game: Game, time: Time): Rent{
+        return Rent(this, game, time)
     }
 
     companion object Factory{
