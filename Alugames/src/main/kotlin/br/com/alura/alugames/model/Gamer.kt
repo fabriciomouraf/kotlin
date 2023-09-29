@@ -18,6 +18,7 @@ data class Gamer (var name:String, var email:String) {
         private set
 
     val games:MutableList<Game?> = mutableListOf()
+    val rentedGames: MutableList<Rent> = mutableListOf()
 
     init {
         validateName()
@@ -56,8 +57,10 @@ data class Gamer (var name:String, var email:String) {
         }
     }
 
-    fun rent(game: Game, time: Time): Rent{
-        return Rent(this, game, time)
+    fun toHire(game: Game, time: Time): Rent{
+        val rent = Rent(this, game, time)
+        this.rentedGames.add(rent)
+        return rent
     }
 
     companion object Factory{
