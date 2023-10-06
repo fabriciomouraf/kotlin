@@ -8,6 +8,7 @@ fun main(){
     val game1 = SearchSharkApi().findGame()[0]
     val game2 = SearchSharkApi().findGame()[4]
     val game3 = SearchSharkApi().findGame()[9]
+    val game4 = SearchSharkApi().findGame()[8]
 
     gamer1.toHire(game1, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
     gamer1.toHire(game2, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
@@ -20,6 +21,7 @@ fun main(){
 
     gamer2.toHire(game1, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
     gamer2.toHire(game2, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
+    gamer2.toHire(game3, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
     gamer2.toHire(game3, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
 
     println(gamer2.rentedGames)

@@ -61,8 +61,14 @@ data class Gamer (var name:String, var email:String) {
 
     fun toHire(game: Game, time: Time): Rent{
         val rent = Rent(this, game, time)
-        this.rentedGames.add(rent)
+        rentedGames.add(rent)
         return rent
+    }
+
+    fun gamesOfTheMonth(month: Int): List<Game> {
+        return rentedGames
+            .filter {rent -> rent.time.startDate.monthValue == month }
+            .map { rent -> rent.game}
     }
 
     companion object Factory{
