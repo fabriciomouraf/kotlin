@@ -17,18 +17,18 @@ fun main(){
     println(gamer1.rentedGames)
 
     val gamer2 = SearchSharkApi().findGamers()[5]
-    gamer2.plain = SubscriptionPlan("Silver", 9.90, 3)
+//    gamer2.plain = SubscriptionPlan("Silver", 9.90, 3)
 
     gamer2.toHire(game1, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
-    gamer2.toHire(game2, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
-    gamer2.toHire(game3, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
-    gamer2.toHire(game3, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
 
     println(gamer2.rentedGames)
 
     gamer2.recommend(7)
-    gamer2.recommend(5)
+    gamer2.recommend(10)
     gamer2.recommend(9)
 
+    gamer2.toHire(game1, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
+
+    println(gamer2.rentedGames)
     println(gamer2)
 }
