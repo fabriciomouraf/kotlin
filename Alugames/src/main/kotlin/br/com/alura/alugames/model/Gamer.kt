@@ -20,7 +20,7 @@ data class Gamer (var name:String, var email:String) {
     val games:MutableList<Game?> = mutableListOf()
     val rentedGames: MutableList<Rent> = mutableListOf()
 
-    var plain: Plain = Plain("BRONZE")
+    var plain: Plain = SinglePlan("BRONZE")
 
     init {
         validateName()
