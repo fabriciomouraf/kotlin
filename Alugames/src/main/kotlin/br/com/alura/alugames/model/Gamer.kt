@@ -5,7 +5,7 @@ import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
-data class Gamer (var name:String, var email:String) {
+data class Gamer (var name:String, var email:String): Recommend {
     var birthDate: String? = null
     var username:String? = null
         set(value) {
@@ -19,6 +19,7 @@ data class Gamer (var name:String, var email:String) {
 
     val games:MutableList<Game?> = mutableListOf()
     val rentedGames: MutableList<Rent> = mutableListOf()
+    private val grades: MutableList<Int> = mutableListOf()
 
     var plain: Plain = SinglePlan("BRONZE")
 
@@ -33,9 +34,14 @@ data class Gamer (var name:String, var email:String) {
                 this.username = username
             }
 
-    override fun toString(): String {
-        return "Gamer(name='$name', email='$email', birthDate=$birthDate, username=$username, tagName=$tagName)"
+    override val average: Double
+        get() = grades.average()
+
+    override fun recommend(grade: Int) {
+        grades.add(grade)
     }
+
+
 
     private fun createTagName(){
         val number = Random.nextInt(10000)
@@ -69,6 +75,11 @@ data class Gamer (var name:String, var email:String) {
         return rentedGames
             .filter {rent -> rent.time.startDate.monthValue == month }
             .map { rent -> rent.game}
+    }
+
+    override fun toString(): String {
+        return "Gamer(name='$name', email='$email', birthDate=$birthDate, username=$username," +
+                " tagName=$tagName, plain=$plain, average=$average)"
     }
 
     companion object Factory{

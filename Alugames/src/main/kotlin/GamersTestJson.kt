@@ -25,4 +25,10 @@ fun main(){
     gamer2.toHire(game3, Time(LocalDate.now(), LocalDate.now().plusDays(7)))
 
     println(gamer2.rentedGames)
+
+    gamer2.recommend(7)
+    gamer2.recommend(5)
+    gamer2.recommend(9)
+
+    println(gamer2)
 }
