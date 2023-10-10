@@ -41,8 +41,6 @@ data class Gamer (var name:String, var email:String): Recommend {
         grades.add(grade)
     }
 
-
-
     private fun createTagName(){
         val number = Random.nextInt(10000)
         val tag = String.format("%05d", number)
@@ -71,7 +69,7 @@ data class Gamer (var name:String, var email:String): Recommend {
         return rent
     }
 
-    fun gamesOfTheMonth(month: Int): List<Game> {
+    fun rentedGamesInTheMonth(month: Int): List<Game> {
         return rentedGames
             .filter {rent -> rent.time.startDate.monthValue == month }
             .map { rent -> rent.game}
