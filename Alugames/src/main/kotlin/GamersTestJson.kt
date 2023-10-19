@@ -30,4 +30,14 @@ fun main(){
 
     println(gamer2.rentedGames)
     println(gamer2)
+
+    println("Recommented Games")
+    gamer1.recommendGame(game1, 7);
+    gamer1.recommendGame(game2, 10);
+
+    gamer2.recommendGame(game3, 6);
+    gamer2.recommendGame(game4, 9);
+
+    println(gamer1.recommentedGames)
+    println(gamer2.recommentedGames)
 }

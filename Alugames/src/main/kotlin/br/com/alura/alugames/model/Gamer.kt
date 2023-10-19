@@ -17,8 +17,9 @@ data class Gamer (var name:String, var email:String): Recommend {
     var tagName:String? = null
         private set
 
-    val games:MutableList<Game?> = mutableListOf()
+    val games: MutableList<Game?> = mutableListOf()
     val rentedGames: MutableList<Rent> = mutableListOf()
+    val recommentedGames: MutableList<Game> = mutableListOf();
     private val grades: MutableList<Int> = mutableListOf()
 
     var plain: Plain = SinglePlan("BRONZE")
@@ -39,6 +40,11 @@ data class Gamer (var name:String, var email:String): Recommend {
 
     override fun recommend(grade: Int) {
         grades.add(grade)
+    }
+
+    fun recommendGame(game: Game, grade: Int){
+        game.recommend(grade);
+        recommentedGames.add(game);
     }
 
     private fun createTagName(){
